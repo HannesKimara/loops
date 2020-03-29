@@ -5,6 +5,7 @@
     padding-bottom: 0.7rem!important;
     border-radius: 0.4rem!important;
     height: 30px!important;
+    padding-left:1em;
 }
 
 .hd-inputs::placeholder {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from '../nav.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(public nav:NavService, public auth:AuthenticationService) { }
 
   ngOnInit(): void {
+    this.nav.visible = true;
   }
 
 }

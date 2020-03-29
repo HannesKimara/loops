@@ -4,8 +4,9 @@
     <a href="" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="" class="black-text">Home</a></li>
-      <li><a href="" class="black-text">Dashboard</a></li>
-      <li><a href="/" class="btn">Start</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/dashboard" class="black-text">Dashboard</a></li>
+      <li *ngIf="isLoggedIn==false"><a routerLink="/login" class="btn">Login</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logoutUser()" class="btn">Logout</a></li>
     </ul>
   </div>
 </nav>

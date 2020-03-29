@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavService } from '../nav.service';
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,11 +10,23 @@ import { NavService } from '../nav.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  isLoggedIn:boolean;
+  truth:boolean = false;
+  constructor(public nav:NavService, public auth:AuthenticationService,public router:Router) {
+  }
 
-  constructor(public nav:NavService) {}
+  logoutUser(){
+    this.auth.logout();
+    this.router.navigate(['home']);
+    this.isLoggedIn = false;
+  }
 
-  
   ngOnInit(): void {
+    this.isLoggedIn = this.auth.loggedIn;
+  }
+
+  ngOnChanges(): void {
+    this.isLoggedIn = this.auth.loggedIn;
   }
 
 }
