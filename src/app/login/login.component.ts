@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   newCred = new LoginCredentials("", "");
+
   loginUser(){
     this.auth.login(this.newCred.email, this.newCred.password).subscribe(
     data => {
@@ -20,10 +21,10 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('last_login', Date());
       },
     error => {
-      console.log(error);
+      alert(error['error']['detail'])
     },
     () => {
-      this.router.navigate([''])
+      this.router.navigate(['home'])
     }
     );
   }

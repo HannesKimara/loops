@@ -7,6 +7,9 @@ import { environment } from '../environments/environment';
 })
 export class AuthenticationService {
 
+  getToken(){
+    return localStorage.getItem('access_token');
+  }
 
   login(email:string, password:string) {
     return this.http.post<any>(environment.API_BASE_URL+'/auth/login', {email, password});

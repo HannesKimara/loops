@@ -10,9 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterializeButtonModule, MaterializeCardModule } from 'materialize-angular';
 import { NavService } from './nav.service';
+import { ApiBackendService } from './api-backend.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { environment } from '../environments/environment';
+
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,8 @@ import { LandingComponent } from './landing/landing.component';
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
-    LandingComponent
+    LandingComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +35,24 @@ import { LandingComponent } from './landing/landing.component';
     MaterializeButtonModule,
     MaterializeCardModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function tokenGetter() {
+             return localStorage.getItem('access_token');},
+        whitelistedDomains: [
+          '127.0.0.1:8000/'
+        ],
+        blacklistedRoutes: [
+          `${environment.API_BASE_URL}/auth/login`,
+          `${environment.API_BASE_URL}/auth/signup`,
+        ]
+      }
+    })
   ],
   providers: [
     NavService,
+    ApiBackendService,
   ],
   bootstrap: [AppComponent]
 })
