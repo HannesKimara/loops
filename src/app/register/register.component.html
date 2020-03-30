@@ -12,21 +12,21 @@
             <div class="col l3 m12 s12"></div>
             <div class="col l6 m12 s12" style="margin-top: 25vh;">
                 <h2>Sign Up</h2>
-                <form>
+                <form (ngSubmit)='registerUser()' #registerForm='ngForm'>
                     <div class="row">
                         <div class="input-field">
                             <div class="col l6 m6 s12">
-                                <input id="first_name" type="text" class="validate hd-inputs" placeholder="First Name">
+                                <input id="first_name" type="text" class="validate hd-inputs" placeholder="First Name" name="last_name" #name='ngModel' [(ngModel)]="userCred.firstName">
                             </div>
                             <div class="col l6 m6 s12">
-                                <input id="last_name" type="text" class="validate hd-inputs" placeholder="Last Name">
+                                <input id="last_name" type="text" class="validate hd-inputs" placeholder="Last Name" name="last_name" #name='ngModel' [(ngModel)]="userCred.lastName">
                             </div>
                         </div>
                         <div class="input-field col l12 m12 s12">
-                            <input id="email" type="email" class="validate hd-inputs" placeholder="Email">
+                            <input id="email" type="email" class="validate hd-inputs" placeholder="Email" name="email" #name='ngModel' [(ngModel)]="userCred.email">
                         </div>
                         <div class="input-field col l12 m12 s12">
-                          <input id="password" type="password" class="validate hd-inputs" placeholder="Password">
+                          <input id="password" type="password" class="validate hd-inputs" placeholder="Password" name="password" #name='ngModel' [(ngModel)]="userCred.password">
                         </div>
                     </div>
                     <button class="btn waves-effect waves-light pink btn-primary" type="submit" name="action">Sign Up

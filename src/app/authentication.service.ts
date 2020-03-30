@@ -15,6 +15,10 @@ export class AuthenticationService {
     return this.http.post<any>(environment.API_BASE_URL+'/auth/login', {email, password});
   }
 
+  register(first_name:string, last_name:string, email:string, password:string){
+    return this.http.post(environment.API_BASE_URL+'/auth/signup', {first_name, last_name, email, password});
+  }
+
   logout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
