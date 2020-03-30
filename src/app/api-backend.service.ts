@@ -12,8 +12,8 @@ export class ApiBackendService {
    return this.http.get(`${environment.API_BASE_URL}/api/v1/hoods`);
   }
 
-  joinHood(publicId:string){
-    return this.http.post(`${environment.API_BASE_URL}/api/v1/join`, {publicId});
+  joinHood(public_id:string){
+    return this.http.post(`${environment.API_BASE_URL}/api/v1/join`, {public_id}, {headers: {Authorization: `Bearer ${this.auth.getToken()}`}});
   }
 
   getHoodBusinesses(){
@@ -25,7 +25,7 @@ export class ApiBackendService {
   }
 
   createPost(title:string, content:string){
-    return this.http.post(`${environment.API_BASE_URL}/api/v1/posts`, {title, content});
+    return this.http.post(`${environment.API_BASE_URL}/api/v1/posts`, {title, content}, {headers: {Authorization: `Bearer ${this.auth.getToken()}`}});
   }
 
   constructor(private http:HttpClient, private auth:AuthenticationService) { }

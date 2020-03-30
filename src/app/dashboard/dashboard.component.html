@@ -1,3 +1,85 @@
-<div *ngFor="let hood of hoods">
-    <p>{{hood.public_id}}</p>
+<h1 *ngIf="inHood" class="ml-1" style="padding-left:1rem">Control Panel <a class="btn" (click)="hasHood = !hasHood">Neighborhoods</a></h1>
+<div class="row ml-1" *ngIf="hasHood==false">
+    <h1>Join a hood</h1>
+    <div *ngFor="let hood of hoods;let i=index" class="">
+        <div class="col s6 m4 l2">
+            <div class="card darken-1">
+              <div class="card-content white-text">
+                <span class="card-title black-text">{{hood.hood_name}}</span>
+                <span class="black-text"><i class="material-icons">location_on</i>{{hood.location}}</span>
+              </div>
+              <div class="card-action">
+                <a (click) = "joinHood(i)" class="btn">JOIN</a>
+                <span class="black-text ml-1"><i class="material-icons">face</i>{{hood.occupants}}</span>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+<div class="row" *ngIf="hasHood">
+  <div class="col l8 m8 s12">
+    <ul class="collection" *ngFor="let post of hoodPosts">
+      <li class="collection-item avatar">
+        <img src="{{post.user_gravatar_url}}" alt="" class="circle">
+        <span class="title">{{post.user_first_name}} {{post.user_last_name}}</span>
+        <p>{{post.content}}</p>
+        <p class="grey-text right">{{post.posted_at | date}}</p>
+      </li>
+    </ul>
+    <div class="card">
+      <form (ngSubmit)='createPost()' #postForm='ngForm'>
+        <div class="row ml-2" style="padding-left: 2rem;">
+          <div class="input-field col l10 m10 s11">
+            <input id="content" type="text" class="validate hd-inputs" placeholder="Post" name="content" #name='ngModel' [(ngModel)]="post.content">
+          </div>
+          <div class="input-field col l2 m2 s12">
+            <button class="btn waves-effect waves-light btn-primary" type="submit" name="action">submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col l4 m4 s12">
+    <div *ngIf="hoodDepartments">
+      <ul class="collection" *ngFor="let dep of hoodDepartments">
+        <li class="collection-item">{{dep.department_name}}</li>
+      </ul>
+    </div>
+    <div *ngIf="hoodDepartments.length ==0">
+      <div class="col s12 m12 l12">
+        <div class="card white darken-1">
+          <div class="card-content white-text">
+            <span class="card-title black-text">Departments</span>
+            <p class="black-text">No Departments have been added to this neighborhood.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="hoodBusinesses.length == 0">
+      <div class="col s12 m12 l12">
+        <div class="card white darken-1">
+          <div class="card-content white-text">
+            <span class="card-title black-text">Businesses</span>
+            <p class="black-text">No Businesses in the neighborhood</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="hoodBusinesses.length > 0">
+      <div class="col s12 m12 l12">
+        <div class="card white darken-1">
+          <div class="card-content white-text">
+            <h1 class="black-text">Businesses {{hoodBusinesses.length}}</h1>
+            <ul class="collection" *ngFor="let business of hoodBusinesses">
+              <li class="collection-item">
+                <span class="title black-text">{{business.business_name}}</span>
+                <p class="black-text">{{business.description}}</p>
+                <p class="black-text">{{business.business_email}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
